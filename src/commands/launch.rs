@@ -10,14 +10,31 @@ use clap::Parser;
 use std::process::exit;
 
 pub fn run(sys: &System, cli: crate::cli::Cli) -> Result<()> {
-    // version flag? handled by clap --version maybe not. 
+    // version flag? handled by clap --version maybe not.
     if !pins::supported_platform() {
         return Err(anyhow!("unsupported platform"));
     }
     // ensure toolchain
     toolchain::ensure_all(sys)?;
+    if !cli.no_brand {
+        match crate::brand::ensure(sys) {
+            Ok(crate::brand::BrandStatus::Patched) => {
+                eprintln!("Branded OpenCode as {}.", crate::brand::BRAND_NAME);
+            }
+            Ok(_) => {}
+            Err(e) => eprintln!("warning: could not brand OpenCode: {e}"),
+        }
+    }
     let provider = provider::resolve(&cli.provider).ok_or_else(|| {
-        anyhow!("unknown provider {}; known: {}", cli.provider, provider::known().iter().map(|p| p.name).collect::<Vec<_>>().join(", "))
+        anyhow!(
+            "unknown provider {}; known: {}",
+            cli.provider,
+            provider::known()
+                .iter()
+                .map(|p| p.name)
+                .collect::<Vec<_>>()
+                .join(", ")
+        )
     })?;
     if cli.print_config {
         let cfg = config::build(sys, &provider, cli.model.as_deref(), cli.ask);

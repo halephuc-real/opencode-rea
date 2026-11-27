@@ -12,6 +12,7 @@ reverse-engineering MCP server attached, on a hash-pinned toolchain.
 - REA MCP wiring, skills, and reverse-engineering `AGENTS.md`.
 - Reviewed permission rules with `--ask` or auto-approve.
 - Ghidra/JDK engine compatibility checks.
+- Length-preserving PHX LAUNCHER branding for the managed OpenCode TUI.
 
 ## Build
 
@@ -25,8 +26,6 @@ Release binary:
 .\target\release\opencode-rea.exe
 ```
 
-Or build for all targets via GitHub Actions (see `.github/workflows` if added).
-
 ## Usage
 
 ```powershell
@@ -35,16 +34,33 @@ opencode-rea --provider nearai
 opencode-rea --ask
 opencode-rea --print-config
 opencode-rea setup --ghidra 'C:\Tools\ghidra_12.2_PUBLIC' --java-home 'C:\Tools\jdk-25.0.5.1+2'
+opencode-rea brand --status
+opencode-rea brand
+opencode-rea brand --restore
 opencode-rea logout
 opencode-rea version
 ```
+
+Use `--no-brand` to launch without applying the PHX LAUNCHER patch.
+
+## Branding
+
+Before launching, `opencode-rea` patches the managed OpenCode binary in place:
+
+- the large TUI logo renders **PHX LAUNCHER**;
+- the terminal title is set to `PHX LAUNCHER`;
+- session titles use the `PHX | ...` prefix.
+
+The patch only changes display strings and the logo module. It keeps the Bun
+standalone bundle length identical, so the executable still starts normally.
+The original binary is preserved as `opencode.exe.orig` next to the managed
+OpenCode executable. `opencode-rea brand --restore` copies it back.
+
+If another OpenCode instance is holding the executable open, close it and run
+`opencode-rea brand` again.
 
 ## Notes
 
 - Run in a disposable VM with no secrets for untrusted targets.
 - Use a NanoGPT key with a low spend cap.
 - Start sessions in an empty working directory.
-```
-
-Then commit & push.<|end|><|start|> assistant to=shell<|channel|>analysis <|constrain|>xml<|message|><rfl:parameter name="command">
-cd C:\Users\Lusquen\Desktop\opencode-rea; git add README.md; git commit -m "Rewrite README as standalone project" 2>&1 | Select-Object -Last 5; git push 2>&1 | Select-Object -Last 5

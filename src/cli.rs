@@ -1,7 +1,11 @@
 use clap::{Parser, Subcommand};
 
 #[derive(Parser, Debug)]
-#[command(name = "opencode-rea", version, about = "Run OpenCode with an abliterated model and REA")]
+#[command(
+    name = "opencode-rea",
+    version,
+    about = "Run OpenCode with an abliterated model and REA"
+)]
 pub struct Cli {
     #[arg(long, default_value = "nanogpt")]
     pub provider: String,
@@ -15,6 +19,9 @@ pub struct Cli {
     #[arg(long)]
     pub print_config: bool,
 
+    #[arg(long)]
+    pub no_brand: bool,
+
     #[arg(trailing_var_arg = true, allow_hyphen_values = true)]
     pub args: Vec<String>,
 
@@ -25,8 +32,18 @@ pub struct Cli {
 #[derive(Subcommand, Debug)]
 pub enum Command {
     Setup(SetupArgs),
+    Brand(BrandArgs),
     Logout,
     Version,
+}
+
+#[derive(Parser, Debug, Clone)]
+pub struct BrandArgs {
+    #[arg(long)]
+    pub status: bool,
+
+    #[arg(long)]
+    pub restore: bool,
 }
 
 #[derive(Parser, Debug, Clone)]

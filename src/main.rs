@@ -1,4 +1,5 @@
 mod archive;
+mod brand;
 mod cli;
 mod commands;
 mod config;
@@ -28,11 +29,9 @@ fn main() {
 fn run(cli: Cli) -> Result<()> {
     let sys = system::System::default_with_version(env!("CARGO_PKG_VERSION"));
     match cli.command {
-        None => {
-
-            crate::commands::launch::run(&sys, cli)
-        }
+        None => crate::commands::launch::run(&sys, cli),
         Some(Command::Setup(args)) => crate::commands::setup::run(&sys, args),
+        Some(Command::Brand(args)) => crate::commands::brand::run(&sys, args),
         Some(Command::Logout) => crate::commands::logout::run(&sys),
         Some(Command::Version) => crate::commands::version::run(&sys),
     }
