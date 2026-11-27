@@ -1231,6 +1231,36 @@ dependencies = [
 ]
 
 [[package]]
+name = "opencode-rea"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "base64 0.22.1",
+ "clap",
+ "colored",
+ "ctrlc",
+ "directories",
+ "flate2",
+ "indicatif",
+ "keyring",
+ "open",
+ "rand 0.8.8",
+ "reqwest",
+ "rpassword",
+ "serde",
+ "serde_json",
+ "sha2",
+ "tar",
+ "tempfile",
+ "thiserror 1.0.69",
+ "tiny_http",
+ "url",
+ "urlencoding",
+ "walkdir",
+ "zip",
+]
+
+[[package]]
 name = "openssl"
 version = "0.10.82"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1477,36 +1507,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "eb95882a1e14462c69aea9984bb261293ccfe6022ef8de0eda18bd5afb0052df"
 dependencies = [
  "rand_core 0.10.1",
-]
-
-[[package]]
-name = "rea-launcher"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "base64 0.22.1",
- "clap",
- "colored",
- "ctrlc",
- "directories",
- "flate2",
- "indicatif",
- "keyring",
- "open",
- "rand 0.8.8",
- "reqwest",
- "rpassword",
- "serde",
- "serde_json",
- "sha2",
- "tar",
- "tempfile",
- "thiserror 1.0.69",
- "tiny_http",
- "url",
- "urlencoding",
- "walkdir",
- "zip",
 ]
 
 [[package]]
