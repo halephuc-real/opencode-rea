@@ -1,0 +1,36 @@
+[package]
+name = "rea-launcher"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "Rust port of rea-launcher: run OpenCode with an abliterated model and REA"
+
+[dependencies]
+anyhow = "1"
+base64 = "0.22"
+clap = { version = "4", features = ["derive"] }
+ctrlc = "3"
+colored = "2"
+directories = "5"
+flate2 = "1"
+indicatif = "0.17"
+keyring = "3"
+open = "5"
+rand = "0.8"
+reqwest = { version = "0.12", features = ["blocking", "rustls-tls", "json"] }
+rpassword = "7"
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["preserve_order"] }
+sha2 = "0.10"
+tar = "0.4"
+tempfile = "3"
+thiserror = "1"
+tiny_http = "0.12"
+url = "2"
+urlencoding = "2"
+walkdir = "2"
+zip = "2"
+
+[profile.release]
+lto = true
+strip = true
