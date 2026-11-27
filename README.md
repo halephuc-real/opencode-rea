@@ -1,4 +1,4 @@
-# rea-launcher
+# opencode-rea
 
 A standalone Rust CLI that launches OpenCode with an abliterated model and the REA
 reverse-engineering MCP server attached, on a hash-pinned toolchain.
@@ -22,7 +22,7 @@ cargo build --release
 Release binary:
 
 ```powershell
-.\target\release\rea-launcher.exe
+.\target\release\opencode-rea.exe
 ```
 
 Or build for all targets via GitHub Actions (see `.github/workflows` if added).
@@ -30,13 +30,13 @@ Or build for all targets via GitHub Actions (see `.github/workflows` if added).
 ## Usage
 
 ```powershell
-rea-launcher -- run "explain how C:\samples\app.exe checks its licence"
-rea-launcher --provider nearai
-rea-launcher --ask
-rea-launcher --print-config
-rea-launcher setup --ghidra 'C:\Tools\ghidra_12.2_PUBLIC' --java-home 'C:\Tools\jdk-25.0.5.1+2'
-rea-launcher logout
-rea-launcher version
+opencode-rea -- run "explain how C:\samples\app.exe checks its licence"
+opencode-rea --provider nearai
+opencode-rea --ask
+opencode-rea --print-config
+opencode-rea setup --ghidra 'C:\Tools\ghidra_12.2_PUBLIC' --java-home 'C:\Tools\jdk-25.0.5.1+2'
+opencode-rea logout
+opencode-rea version
 ```
 
 ## Notes

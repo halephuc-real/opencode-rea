@@ -1,7 +1,7 @@
 use clap::{Parser, Subcommand};
 
 #[derive(Parser, Debug)]
-#[command(name = "rea-launcher", version, about = "Run OpenCode with an abliterated model and REA")]
+#[command(name = "opencode-rea", version, about = "Run OpenCode with an abliterated model and REA")]
 pub struct Cli {
     #[arg(long, default_value = "nanogpt")]
     pub provider: String,

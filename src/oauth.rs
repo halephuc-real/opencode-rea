@@ -30,7 +30,7 @@ pub fn signin() -> Result<String> {
 
     let callback_url = format!("http://127.0.0.1:{port}/callback");
     let url = format!(
-        "https://nano-gpt.com/auth?callback_url={}&code_challenge={}&code_challenge_method=S256&scope=api.use%20models.read&state={}&client_name=rea-launcher",
+        "https://nano-gpt.com/auth?callback_url={}&code_challenge={}&code_challenge_method=S256&scope=api.use%20models.read&state={}&client_name=opencode-rea",
         urlencoding::encode(&callback_url),
         urlencoding::encode(&challenge),
         urlencoding::encode(&state)

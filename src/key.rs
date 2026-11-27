@@ -11,7 +11,7 @@ pub fn resolve(sys: &System, provider: &Provider) -> Result<String> {
         }
     }
 
-    if let Ok(entry) = keyring::Entry::new("rea-launcher", provider.name) {
+    if let Ok(entry) = keyring::Entry::new("opencode-rea", provider.name) {
         if let Ok(v) = entry.get_password() {
             if !v.trim().is_empty() {
                 return Ok(v);
@@ -23,7 +23,7 @@ pub fn resolve(sys: &System, provider: &Provider) -> Result<String> {
     if let Some(v) = read_legacy_credential(provider.name) {
         if !v.trim().is_empty() {
 
-            if let Ok(entry) = keyring::Entry::new("rea-launcher", provider.name) {
+            if let Ok(entry) = keyring::Entry::new("opencode-rea", provider.name) {
                 let _ = entry.set_password(&v);
             }
             return Ok(v);
@@ -44,7 +44,7 @@ pub fn resolve(sys: &System, provider: &Provider) -> Result<String> {
         k
     };
 
-    match keyring::Entry::new("rea-launcher", provider.name) {
+    match keyring::Entry::new("opencode-rea", provider.name) {
         Ok(entry) => {
             if let Err(e) = entry.set_password(&key) {
                 eprintln!("warning: could not save key to credential store: {e}");
@@ -57,7 +57,7 @@ pub fn resolve(sys: &System, provider: &Provider) -> Result<String> {
 }
 
 pub fn delete(provider_name: &str) {
-    if let Ok(e) = keyring::Entry::new("rea-launcher", provider_name) {
+    if let Ok(e) = keyring::Entry::new("opencode-rea", provider_name) {
         let _ = e.delete_credential();
     }
 }

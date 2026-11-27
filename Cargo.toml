@@ -1,9 +1,9 @@
 [package]
-name = "rea-launcher"
+name = "opencode-rea"
 version = "0.1.0"
 edition = "2021"
 license = "MIT"
-description = "Rust port of rea-launcher: run OpenCode with an abliterated model and REA"
+description = "Run OpenCode with an abliterated model and REA"
 
 [dependencies]
 anyhow = "1"

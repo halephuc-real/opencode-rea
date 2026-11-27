@@ -11,9 +11,20 @@ pub struct System {
 impl System {
     pub fn default_with_version(version: &str) -> Self {
         let base = BaseDirs::new().expect("no home directory");
+        let cache_dir = base.cache_dir().join("opencode-rea");
+        let config_dir = base.config_dir().join("opencode-rea");
+        // migrate from legacy rea-launcher directories if present
+        let old_cache = base.cache_dir().join("rea-launcher");
+        if !cache_dir.exists() && old_cache.exists() {
+            let _ = std::fs::rename(&old_cache, &cache_dir);
+        }
+        let old_config = base.config_dir().join("rea-launcher");
+        if !config_dir.exists() && old_config.exists() {
+            let _ = std::fs::rename(&old_config, &config_dir);
+        }
         Self {
-            cache_dir: base.cache_dir().join("rea-launcher"),
-            config_dir: base.config_dir().join("rea-launcher"),
+            cache_dir,
+            config_dir,
             version: version.to_string(),
         }
     }

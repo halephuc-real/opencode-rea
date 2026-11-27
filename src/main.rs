@@ -20,7 +20,7 @@ use cli::{Cli, Command};
 fn main() {
     let cli = Cli::parse();
     if let Err(e) = run(cli) {
-        eprintln!("rea-launcher: {e}");
+        eprintln!("opencode-rea: {e}");
         std::process::exit(1);
     }
 }
