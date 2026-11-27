@@ -29,6 +29,11 @@ pub fn run(sys: &System, cli: crate::cli::Cli) -> Result<()> {
     let model_id = provider::model_id(&provider, cli.model.as_deref());
     eprintln!("{}: {}", provider.name, model_id);
     // launch
-    let code = opencode::launch(sys, &provider, cli.model.as_deref(), cli.ask, &cli.args, &key)?;
+    let mut args = cli.args.clone();
+    if args.len() == 1 && !args[0].starts_with('-') && args[0] != "run" {
+        args.insert(0, "run".to_string());
+    }
+    eprintln!("Dang khoi dong OpenCode...");
+    let code = opencode::launch(sys, &provider, cli.model.as_deref(), cli.ask, &args, &key)?;
     exit(code);
 }

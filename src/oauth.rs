@@ -35,7 +35,8 @@ pub fn signin() -> Result<String> {
         urlencoding::encode(&challenge),
         urlencoding::encode(&state)
     );
-    eprintln!("Open this URL to sign in: {url}");
+    eprintln!("Dang mo trinh duyet de dang nhap NanoGPT. Sau khi dong y, quay lai cua so nay.");
+    eprintln!("Neu khong tu mo, mo link: {url}");
     let _ = open::that(&url);
 
     let deadline = std::time::Instant::now() + Duration::from_secs(300);
