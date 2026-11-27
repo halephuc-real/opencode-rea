@@ -15,6 +15,7 @@ pub fn ensure_all(sys: &System) -> Result<()> {
     install_opencode(sys)?;
 
     install_agents(sys)?;
+    install_plugin(sys)?;
     Ok(())
 }
 
@@ -166,6 +167,15 @@ fn install_opencode(sys: &System) -> Result<()> {
 fn install_agents(sys: &System) -> Result<()> {
     let path = sys.agents_path();
     let embedded = include_str!("agents.md");
+    if !path.exists() || std::fs::read_to_string(&path).unwrap_or_default() != embedded {
+        std::fs::write(&path, embedded)?;
+    }
+    Ok(())
+}
+
+fn install_plugin(sys: &System) -> Result<()> {
+    let path = sys.cache_dir.join("plugin.js");
+    let embedded = include_str!("plugin.js");
     if !path.exists() || std::fs::read_to_string(&path).unwrap_or_default() != embedded {
         std::fs::write(&path, embedded)?;
     }

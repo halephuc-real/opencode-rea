@@ -65,6 +65,7 @@ pub fn build(sys: &System, provider: &Provider, model: Option<&str>, _ask: bool)
     cfg.insert("share".into(), json!("disabled"));
     cfg.insert("autoupdate".into(), json!(false));
     cfg.insert("instructions".into(), json!([sys.agents_path().to_string_lossy()]));
+    cfg.insert("plugin".into(), json!([sys.cache_dir.join("plugin.js").to_string_lossy()]));
     cfg.insert("mcp".into(), Value::Object(mcp));
     cfg.insert("permission".into(), Value::Object(perm));
     Value::Object(cfg)
