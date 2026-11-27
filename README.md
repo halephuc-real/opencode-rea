@@ -1,8 +1,17 @@
-# rea-launcher (Rust port)
+# rea-launcher
 
-A Rust rewrite of [protonspy/opencode-rea](https://github.com/protonspy/opencode-rea), with the same
-purpose: one command that runs OpenCode with an abliterated model (NanoGPT or NEAR AI) and the REA
-reverse-engineering MCP server, on a hash-pinned toolchain.
+A standalone Rust CLI that launches OpenCode with an abliterated model and the REA
+reverse-engineering MCP server attached, on a hash-pinned toolchain.
+
+## Features
+
+- One command to start a reverse-engineering session.
+- Managed toolchain: Node.js 24.22.3, REA 6.10.1, OpenCode 1.19.5, verified by hash.
+- Providers: NanoGPT (default) or NEAR AI.
+- Automatic key handling (env, credential store, OAuth/PKCE, hidden prompt).
+- REA MCP wiring, skills, and reverse-engineering `AGENTS.md`.
+- Reviewed permission rules with `--ask` or auto-approve.
+- Ghidra/JDK engine compatibility checks.
 
 ## Build
 
@@ -10,7 +19,13 @@ reverse-engineering MCP server, on a hash-pinned toolchain.
 cargo build --release
 ```
 
-Binary: `target/release/rea-launcher.exe`.
+Release binary:
+
+```powershell
+.\target\release\rea-launcher.exe
+```
+
+Or build for all targets via GitHub Actions (see `.github/workflows` if added).
 
 ## Usage
 
@@ -26,6 +41,10 @@ rea-launcher version
 
 ## Notes
 
-- Uses the already-installed toolchain under `%LOCALAPPDATA%\rea-launcher` when present.
-- Reads legacy credentials created by the Go version (Windows Credential Manager).
-- Ignores Ctrl+C in the launcher and leaves it to OpenCode.
+- Run in a disposable VM with no secrets for untrusted targets.
+- Use a NanoGPT key with a low spend cap.
+- Start sessions in an empty working directory.
+```
+
+Then commit & push.<|end|><|start|> assistant to=shell<|channel|>analysis <|constrain|>xml<|message|><rfl:parameter name="command">
+cd C:\Users\Lusquen\Desktop\opencode-rea; git add README.md; git commit -m "Rewrite README as standalone project" 2>&1 | Select-Object -Last 5; git push 2>&1 | Select-Object -Last 5
